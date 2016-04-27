@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+          function onDeviceReady() {
+
+                  var myContact = navigator.contacts.create({"displayName": "The New Contact"});
+                  var name = new ContactName();
+                  name.givenName = "pavan";
+                  name.familyName = "jindam";
+                  myContact.name = name;
+
+                  var phoneNumbers = [];
+                  phoneNumbers[0] = new ContactField('work', '212-111-1234', false);
+                  phoneNumbers[1] = new ContactField('mobile', '917-555-5432', true); // preferred number
+                  phoneNumbers[2] = new ContactField('home', '203-555-7890', false);
+                  myContact.phoneNumbers = phoneNumbers;
+
+                  myContact.note = "Example note for the newly added contact";
+
+                  myContact.save(onSuccessCallBack, onErrorCallBack);
+
+                  function onSuccessCallBack(contact) {
+                      alert("Save Success");
+                  };
+
+                  function onErrorCallBack(contactError) {
+                      alert("Error = " + contactError.code);
+                  };
+
+}
+
+    </script>
+  </head>
+  <body>
+    <h1>Example</h1>
+    <p>Create Contact</p>
+  </body>
+</html>
